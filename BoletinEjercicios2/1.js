@@ -6,14 +6,36 @@
 // distintas.
 // - Una propuesta de nombre usuario de la siguiente forma: inicial 
 // del nombre, primeras tres letras del apellido1 y primeras tres 
-// - letras del apellido2. Ejemplo: Juan Martín López  → jmarlop
+// letras del apellido2. Ejemplo: Juan Martín López  → jmarlop
 function actividad1() {
+    let nombreCompleto = prompt("Introduce tu nombre y apellidos:");
+    
+    let nombreSinEspacios = nombreCompleto.replace(/\s+/g, '');
+    let tamaño = nombreSinEspacios.length;
+    
+    let enMinusculas = nombreCompleto.toLowerCase();
+    let enMayusculas = nombreCompleto.toUpperCase();
+    
+    let partes = nombreCompleto.split(' ');
+    let nombre = partes[0];
+    let apellido1 = partes[1] || '';
+    let apellido2 = partes[2] || '';
+    
+    let usuario = (nombre.charAt(0) + apellido1.slice(0, 3) + apellido2.slice(0, 3)).toLowerCase();
+    
+    document.getElementById("resultado").innerHTML = `
+        <p>Tamaño (sin espacios): ${tamaño}</p>
+        <p>En minúsculas: ${enMinusculas}</p>
+        <p>En mayúsculas: ${enMayusculas}</p>
+        <p>Nombre: ${nombre}<br>Apellido 1: ${apellido1}<br>Apellido 2: ${apellido2}</p>
+        <p>Propuesta de nombre de usuario: ${usuario}</p>
+    `;
     
 }
 
 //Crear un programa que solicite al usuario una propuesta de
 // contraseña y compruebe si cumple con los siguientes requisitos:
-// Tiene entre 8 y 16 caracteres.
+// - Tiene entre 8 y 16 caracteres.
 // - Tiene, al menos, una letra mayúscula.
 // - Tiene, al menos, una letra minúscula.
 // - Tiene, al menos, un dígito.
@@ -21,31 +43,124 @@ function actividad1() {
 // guión alto, guión bajo, arroba, almohadilla, dólar, tanto por 
 // ciento o ampersand
 function actividad2() {
+let constraseña = prompt("Introduce una propuesta de contraseña:");
 
+let longitud = false;
+if (constraseña.length >= 8 && constraseña.length <= 16) {
+    longitud = true;
+}
+
+let mayuscula = false;
+for (let i = 0; i < constraseña.length; i++) {
+    let letraM = constraseña.charAt(i);
+    if (letraM >= 'A' && letraM <= 'Z') {
+        mayuscula = true;
+    }
+}
+
+let minuscula = false;
+for (let i = 0; i < constraseña.length; i++) {
+    let letram = constraseña.charAt(i);
+    if (letram >= 'a' && letram <= 'z') {
+        minuscula = true;
+    }
+}
+
+let digito = false;
+for (let i = 0; i < constraseña.length; i++) {
+    let numero = constraseña.charAt(i);
+    if (numero >= '0' && numero <= '9') {
+        digito = true;
+    }
+}
+
+let caracter = false;
+for (let i = 0; i < constraseña.length; i++) {
+    let cEspecial = constraseña.charAt(i);
+    if (cEspecial == '-' || cEspecial == '_' || cEspecial == '@' || cEspecial == '#' || 
+        cEspecial == '$' || cEspecial == '%' || cEspecial == '&') {
+            caracter = true
+        }
+    
+}
+
+if(longitud && mayuscula && minuscula && digito && caracter) {
+    document.getElementById("resultado").innerHTML = ("Contraseña válida.")
+}
+else {
+    document.getElementById("resultado").innerHTML = ("Contraseña no válida.")
+}
 }
 
 //Crear un script que muestre el número de palabras que contiene
 //una frase introducida por el usuario.
 function actividad3() {
+    let cadena = prompt("Introduce una frase: ");
 
+    let espacios = 1;
+    for (i = 0; i < cadena.length; i++) {
+        let caracter = cadena.charAt(i);
+        if (caracter == " ") {
+            espacios ++;
+        }
+    }
+
+    document.getElementById("resultado").innerHTML = (cadena + "<br> Tiene " + espacios + " palabras.")
 }
 
 //Crear un script que ponga en negrita las letras mayúsculas que
 //hay en una frase.
 function actividad4() {
+    let frase = prompt("Introduce una frase: ")
+    let letra = "";
+
+    for (let i = 0; i < frase.length; i++) {
+        let c = frase.charAt(i);
+        if (c === c.toUpperCase() && c !== c.toLowerCase()) {
+            letra += "<b>" + c + "</b>";
+        } else {
+            letra += c;
+        }
+    }
+    document.getElementById("resultado").innerHTML = letra;
 
 }
 
 //Crear un script que ponga en cursiva las letras minúsculas que
 //hay en una frase.
 function actividad5() {
+    let frase = prompt("Introduce una frase: ")
+    let letra = "";
 
+    for (let i = 0; i < frase.length; i++) {
+        let c = frase.charAt(i);
+        if (c === c.toLowerCase() && c !== c.toUpperCase()) {
+            letra += "<i>" + c + "</i>";
+        } else {
+            letra += c;
+        }
+    }
+    document.getElementById("resultado").innerHTML = letra;
 }
 
 //Crear un script que convierte las palabras mayúsculas de una
 //frase en minúsculas y viceversa.
 function actividad6() {
+    let frase = prompt("Introduce una frase: ")
+    let letra = "";
 
+    for (let i = 0; i < frase.length; i++) {
+        let c = frase.charAt(i);
+        if (c === c.toLowerCase() && c !== c.toUpperCase()) {
+            letra += c.toUpperCase();
+        } else if (c === c.toUpperCase() && c !== c.toLowerCase()) {
+            letra += c.toLowerCase();
+        } else {
+            letra += c;
+        }
+    }
+
+    document.getElementById("resultado").innerHTML = letra;
 }
 
 //Realiza un programa que reciba una cadena con el siguiente
@@ -58,7 +173,22 @@ function actividad6() {
 // - Suponiendo un formato de email “direccion@servidor” debe mostrar
 // el nombre del servidor asociado.
 function actividad7() {
+    let datos = prompt("Introduce los datos en el formato nombre:apellidos:telefono:email:codigopostal");
+    
+    let partes = datos.split(':');
+    let nombre = partes[0];
+    let apellidos = partes[1];
+    let telefono = partes[2];
+    let email = partes[3];
+    let codigopostal = partes[4];  
+    let servidor = email.split('@')[1];
 
+    document.getElementById("resultado").innerHTML = `
+        <p>Código postal: ${codigopostal}</p>
+        <p>Apellidos: ${apellidos}</p>
+        <p>Email: ${email}</p>
+        <p>Servidor: ${servidor}</p>
+    `;
 }
 
 // Crear un script que muestre mediante un mensaje la fecha actual
