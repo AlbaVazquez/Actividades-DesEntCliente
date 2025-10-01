@@ -196,12 +196,65 @@ function actividad7() {
 // día de la semana (en letra) o los tres anteriores a la vez, según
 // elija el usuario.
 function actividad8() {
+    let opcion = prompt("Elige una opción:\n1. Fecha actual\n2. Hora actual\n3. Día de la semana\n4. Todo");
+    let fecha = new Date();
+    let resultado = "";
+
+    switch (opcion) {
+        case '1':
+            let dia = fecha.getDate();
+            let mes = fecha.toLocaleString('default', { month: 'long' });
+            let año = fecha.getFullYear();
+            resultado = `Fecha actual: ${dia} de ${mes} de ${año}`;
+            break;
+        case '2':
+            let horas = fecha.getHours();
+            let minutos = fecha.getMinutes();
+            resultado = `Hora actual: ${horas}:${minutos < 10 ? '0' + minutos : minutos}`;
+            break;
+        case '3': 
+            let diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            let diaSemana = diasSemana[fecha.getDay()];
+            resultado = `Día de la semana: ${diaSemana}`;
+            break;
+        case '4':
+            let d = fecha.getDate();
+            let m = fecha.toLocaleString('default', { month: 'long' });
+            let a = fecha.getFullYear();
+            let h = fecha.getHours();
+            let min = fecha.getMinutes();
+            let ds = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            let diaS = ds[fecha.getDay()];
+            resultado = `Fecha actual: ${d} de ${m} de ${a}<br>Hora actual: ${h}:${min < 10 ? '0' + min : min}<br>Día de la semana: ${diaS}`;
+            break;
+        default:
+            resultado = "Opción no válida.";
+    }
+    document.getElementById("resultado").innerHTML = resultado;
+
 
 }
 
 // Crear un script que reciba dos fechas y diga cuál es anterior y
 // el tiempo transcurrido entre ellas (en años, meses y días).
 function actividad9() {
+    let fecha1Str = prompt("Introduce la primera fecha (YYYY-MM-DD):");
+    let fecha2Str = prompt("Introduce la segunda fecha (YYYY-MM-DD):");
+    let fecha1 = new Date(fecha1Str);
+    let fecha2 = new Date(fecha2Str);
+    let resultado = ""; 
+
+    if (fecha1 < fecha2) {
+        resultado = "La primera fecha es anterior a la segunda.<br>";
+    }  else if (fecha1 > fecha2) {
+        resultado = "La segunda fecha es anterior a la primera.<br>";
+    } else {
+        resultado = "Ambas fechas son iguales.<br>";
+    }
+
+    let diferencia = fecha2 - fecha1;
+
+    document.getElementById("resultado").innerHTML = resultado + "Diferencia en milisegundos: " + diferencia;
 
 }
 
@@ -211,7 +264,16 @@ function actividad9() {
 // los días que hemos vivido hasta el momento (deberás modificar el
 // realizado para calcular distancia entre fechas).
 function actividad10() {
+    let nombre = prompt("¿Cuál es tu nombre?");
+    let fechaNacimientoStr = prompt("Introduce tu fecha de nacimiento (YYYY-MM-DD):");
+    let fechaNacimiento = new Date(fechaNacimientoStr);
+    let fechaActual = new Date();
 
+    let diferencia = fechaActual - fechaNacimiento;
+    let horasVividas = diferencia / (1000 * 3600);
+    let diasVividos = horasVividas / 24;
+
+    document.getElementById("resultado").innerHTML = `Hola ${nombre}, has vivido aproximadamente ${parseInt(diasVividos)} días / ${parseInt(horasVividas)} horas.`;
 }
 
 // Hacer un programa que sirva para resolver ecuaciones de segundo
