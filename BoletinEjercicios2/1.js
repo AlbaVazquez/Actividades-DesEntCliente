@@ -279,13 +279,45 @@ function actividad10() {
 // Hacer un programa que sirva para resolver ecuaciones de segundo
 // grado del tipo ax2+bx+c = 0.
 function actividad11() {
+    let a = parseFloat(prompt("Introduce el valor de a:"));
+    let b = parseFloat(prompt("Introduce el valor de b:"));
+    let c = parseFloat(prompt("Introduce el valor de c:"));
 
+    let discriminante = b * b - 4 * a * c;
+    let resultado = "";
+
+    if (discriminante > 0) {
+        let raiz1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+        let raiz2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+        resultado = `Las raíces son reales y diferentes: x1 = ${raiz1}, x2 = ${raiz2}`;
+    }
+    else if (discriminante === 0) {
+        let raiz = -b / (2 * a);
+        resultado = `Las raíces son reales e iguales: x = ${raiz}`;
+    }
+    else {
+        resultado = "Las raíces son complejas y no reales.";
+    }
+    document.getElementById("resultado").innerHTML = resultado;s
 }
 
 // Crear un script que devuelva la suma de todos los elementos
 // numéricos de un array y devuelva también el número de elementos
 // no numéricos.
 function actividad12() {
+    let array = [1, 'dos', 3, 'cuatro', 5, null, 7, undefined, 9, 'diez'];
+    let suma = 0;
+    let noNumericos = 0;
+
+    for (let i = 0; i < array.length; i++) {
+        if (typeof array[i] === 'number') {
+            suma += array[i];
+        } else {
+            noNumericos++;
+        }
+    }
+
+    document.getElementById("resultado").innerHTML = `Suma de elementos numéricos: ${suma}<br>Número de elementos no numéricos: ${noNumericos}`;
 
 }
 
