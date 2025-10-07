@@ -327,13 +327,62 @@ function actividad12() {
 // elementos es impar, primero irán los impares ordenados y luego
 // los pares ordenados; si el número es par, al contrario.
 function actividad13() {
+    //Crear el array que contiene los números, y en los que meteremos pares e impares
+    let array = [4, 67, 34, 45, 3, 65, 2];
+    let pares = []
+    let impares = []
 
+    //Recorrer las posiciones del array buscando pares, si lo es añadir la posición actual del array a la tabla de pares
+    for (let i = 0; i < array.length; i++)
+    {
+        if (array[i] % 2 == 0)
+        {
+            pares.push(array[i])
+        }
+        //si no lo es, añadirlo a la de impares
+        else
+        {
+            impares.push(array[i])
+        }
+    }
+
+    //ordenará comparando un número con otro
+    pares.sort((a, b) => a - b);
+    impares.sort((a, b) => a - b);
+
+    //creación del array resultante
+    let resultadoArray = [];
+    //si su medida es par, une los pares con los impares
+    if (array.length % 2 == 0)
+    {
+        resultadoArray = pares.concat(impares);
+    }
+    //si no lo es, une los impares con los pares
+    else
+    {
+        resultadoArray = impares.concat(pares);
+    }
+
+    document.getElementById("resultado").innerHTML = 
+        `Array original: [${array}]<br>Array ordenado: [${resultadoArray}]`;
 }
 
 // Crear una función que muestre el contenido de un array, cada
 // elemento en una línea distinta.
 function actividad14() {
 
+    let array = [1,2,3,4,5]
+
+    function mostrar_array(Array) {
+        let resultado = ""
+        for (let i = 0; i < array.length; i++){
+            resultado += array[i] + "<br>"
+        }
+        return resultado
+    }
+
+    let mostrarArray = mostrar_array(array);
+    document.getElementById("resultado").innerHTML = mostrarArray;
 }
 
 // Realiza un programa que cada 20 segundos (mediante setInterval)
