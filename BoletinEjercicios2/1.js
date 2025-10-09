@@ -391,8 +391,19 @@ function actividad14() {
 // todos los DNIs introducidos. Aquí un enlace para saber como
 // calcular la letra de DNI.
 function actividad15() {
+    let dni = prompt("Introduce un DNI: ")
+    let dnis = []
+    setInterval(preguntarDNI, 20000);
 
-}
+    function preguntarDNI() {
+        if (dni !== "-1") {
+            dnis.push(dbi)
+            dni = prompt("Introduce un DNI: ")
+        } else {
+            clearInterval(this)
+            document.getElementById("resultado").innerHTML = "DNIs introducidos: " + dnis.join(", ")
+        }
+}}
 
 // Realiza un programa que pasados 20 segundos, nos muestre una
 // sola vez la fecha actual del sistema
