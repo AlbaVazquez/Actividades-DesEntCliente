@@ -391,13 +391,13 @@ function actividad14() {
 // todos los DNIs introducidos. Aquí un enlace para saber como
 // calcular la letra de DNI.
 function actividad15() {
-    let dni = prompt("Introduce un DNI: ")
     let dnis = []
     setInterval(preguntarDNI, 20000);
 
+    dni = prompt("Introduce un DNI: ")
     function preguntarDNI() {
         if (dni !== "-1") {
-            dnis.push(dbi)
+            dnis.push(dni)
             dni = prompt("Introduce un DNI: ")
         } else {
             clearInterval(this)
@@ -408,7 +408,13 @@ function actividad15() {
 // Realiza un programa que pasados 20 segundos, nos muestre una
 // sola vez la fecha actual del sistema
 function actividad16() {
+setInterval(mostrarFecha, 100);
 
+function mostrarFecha() {
+    let fecha = new Date();
+    document.getElementById("resultado").innerHTML = fecha.toLocaleString();
+    clearInterval(this); 
+}
 }
 
 // Realiza un programa que pregunte una letra de la A a la Z.
@@ -416,8 +422,18 @@ function actividad16() {
 // (del 001 al 999) tienen esa letra y tras ello te mostrará
 // “de golpe” el listado de todos los DNIs que tienen esa letra.
 function actividad17() {
+    letra_usuario = prompt("Introduce una letra de la A a la Z: ").toUpperCase();
+    letras="TRWAGMYFPDXBNJZSQVHLCKE";
+    listado = ""
 
-}
+    for (let i=1; i<=999; i++) {
+        letra_dni = letras.charAt(i%23);
+        if (letra_dni == letra_usuario) {
+            listado += (String(i) + letra_dni + "<br>");
+        }
+
+    document.getElementById("resultado").innerHTML = listado;
+}}
 
 // Realiza un programa que calcule cuántos números son a la vez
 // primos y palíndromos desde el 1 hasta 100000. Debe guardar todos
