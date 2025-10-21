@@ -32,6 +32,11 @@ class Arbol {
 
     toHTMLRow(){
         let fila = `<td>${this.codigo}</td><td>${this.tallaje}</td><td>${this.especie}</td>`;
+        
+        /*for fila atributo in Object.values(this) {
+            fila += "<td>" + atributo + "</td>";
+        }*/
+
         return fila
     }
 }
@@ -44,11 +49,12 @@ class Vivero {
     }
 }
 
-class Perenne {
+class Perenne extends Arbol{
     _frutal;
 
-    constructor(frutal){
+    constructor(codigo, tallaje, especie, frutal){
         this._frutal = frutal;
+        super(tallaje, codigo, especie)
     }
 
     get frutal() {
@@ -56,12 +62,6 @@ class Perenne {
     }
     set frutal(value) {
         this._frutal = value;
-    }
-
-    toHTMLRow() {
-        let fila = Arbol.toHTMLRow(this);
-        fila += `<td>${this.frutal ? 'Sí' : 'No'}</td>`;
-        return fila;
     }
 }
 
