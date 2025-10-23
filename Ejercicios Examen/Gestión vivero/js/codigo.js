@@ -3,7 +3,7 @@
 let a1 = new Caduco(1, 150, "Manzano", "mayo");
 let a2 = new Perenne(2, 200, "Pino", false);
 let a3 = new Caduco(3, 120, "Cerezo", "abril");
-let a4 = new Perenne(4, 180, "Olivo", true);
+let a4 = new Perenne(2, 200, "Pino", false);
 
 let vivero = new Vivero();
 vivero.altaArbol(a1);
@@ -11,7 +11,7 @@ vivero.altaArbol(a2);
 vivero.altaArbol(a3);
 vivero.altaArbol(a4);
 
-console.log(vivero);
+console.log(vivero.arboles);
 
 // // Variables globales
 // let oVivero = new Vivero();

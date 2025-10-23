@@ -52,8 +52,8 @@ class Perenne extends Arbol{
     _frutal;
 
     constructor(codigo, tallaje, especie, frutal){
-        this._frutal = frutal;
         super(tallaje, codigo, especie);
+        this._frutal = frutal;
     }
 
     get frutal() {
@@ -68,8 +68,8 @@ class Caduco extends Arbol{
     _mesFloracion;
 
     constructor(codigo, tallaje, especie, mesFloracion){
-        this._mesFloracion = mesFloracion;
         super(tallaje, codigo, especie);
+        this._mesFloracion = mesFloracion;
     }
 
     get mesFloracion() {
@@ -92,16 +92,19 @@ class Vivero {
     set arboles(value) {
         this._arboles = value;
     }
-
+    
     altaArbol(oArbol){ // Devuelve true si el árbol ya existía, false en caso contrario y lo añade al array
         let existe = false;
-        if(this.arboles.includes(oArbol)){
+        if(this.arboles.filter((elem) => elem.codigo == oArbol.codigo).length >= 1){
             existe = true;
         } else {
             this.arboles.push(oArbol);
             existe = false;
         }
         return existe;
-    } 
-}
+    }
 
+    tallajeArbol(iCodigo, iTallaje){
+        
+    }
+}
