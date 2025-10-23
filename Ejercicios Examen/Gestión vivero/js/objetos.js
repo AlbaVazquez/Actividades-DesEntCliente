@@ -31,21 +31,20 @@ class Arbol {
     }
 
     toHTMLRow(){
-        let fila = `<td>${this.codigo}</td><td>${this.tallaje}</td><td>${this.especie}</td>`;
-        
-        /*for fila atributo in Object.values(this) {
-            fila += "<td>" + atributo + "</td>";
-        }*/
+        let fila = "<tr>";
+        /*fila +=
+        "<tr><td>" +
+        this.codigo +
+        "</td><td>" +
+        this.tallaje +
+        "</td><td>" +
+        this.especie +
+        "</td></tr>";*/
 
-        return fila
+    for (let atributo of Object.values(this)) {
+      fila += "<td>" + atributo + "</td>";
     }
-}
-
-class Vivero {
-    arboles = [];
-
-    constructor() {
-        this.arboles = []
+    return fila + "</tr>";
     }
 }
 
@@ -54,7 +53,7 @@ class Perenne extends Arbol{
 
     constructor(codigo, tallaje, especie, frutal){
         this._frutal = frutal;
-        super(tallaje, codigo, especie)
+        super(tallaje, codigo, especie);
     }
 
     get frutal() {
@@ -65,6 +64,44 @@ class Perenne extends Arbol{
     }
 }
 
-class Caduco {
+class Caduco extends Arbol{
+    _mesFloracion;
 
+    constructor(codigo, tallaje, especie, mesFloracion){
+        this._mesFloracion = mesFloracion;
+        super(tallaje, codigo, especie);
+    }
+
+    get mesFloracion() {
+        return this._mesFloracion;
+    }
+    set mesFloracion(value) {
+        this._mesFloracion = value;
+    }
 }
+
+class Vivero {
+    _arboles = [];
+
+    constructor() {
+        this._arboles = []
+    }
+    get arboles() {
+        return this._arboles;
+    }
+    set arboles(value) {
+        this._arboles = value;
+    }
+
+    altaArbol(oArbol){ // Devuelve true si el árbol ya existía, false en caso contrario y lo añade al array
+        let existe = false;
+        if(this.arboles.includes(oArbol)){
+            existe = true;
+        } else {
+            this.arboles.push(oArbol);
+            existe = false;
+        }
+        return existe;
+    } 
+}
+
