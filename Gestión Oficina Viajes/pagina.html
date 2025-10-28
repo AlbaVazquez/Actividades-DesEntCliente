@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agencia de Viajes</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+        #mensajes {
+            min-height: 50px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-4">
+
+        <h1 class="text-center mb-4">Gestión Agencia de Viajes</h1>
+
+        <!-- CAPA DE MENSAJES -->
+        <div id="mensajes" class="alert alert-info text-center">
+            Bienvenido/a, selecciona una acción.
+        </div>
+
+        <hr>
+
+        <!-- FORMULARIO CLIENTES -->
+        <h3>Registro de Cliente</h3>
+        <form id="formCliente" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">DNI</label>
+                <input type="text" class="form-control" id="dniCliente" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreCliente" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidosCliente" required>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="btnRegistrarCliente">Registrar Cliente</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- FORMULARIO ALOJAMIENTOS -->
+        <h3>Registrar Alojamiento</h3>
+        <form id="formAlojamiento" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">ID Alojamiento</label>
+                <input type="text" class="form-control" id="idAlojamiento" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Capacidad</label>
+                <input type="number" class="form-control" id="capacidadAloj" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Tipo</label>
+                <select id="tipoAlojamiento" class="form-select">
+                    <option value="hotel">Habitación de Hotel</option>
+                    <option value="apartamento">Apartamento</option>
+                </select>
+            </div>
+
+            <!-- HOTEL -->
+            <div class="col-md-3" id="campoDesayuno">
+                <label class="form-label">Desayuno incluido</label>
+                <select id="desayuno" class="form-select">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <!-- APARTAMENTO -->
+            <div class="col-md-3 d-none" id="campoAparcamiento">
+                <label class="form-label">Aparcamiento</label>
+                <select id="aparcamiento" class="form-select">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="col-md-3 d-none" id="campoDormitorios">
+                <label class="form-label">Dormitorios</label>
+                <input type="number" id="dormitorios" class="form-control">
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-success" id="btnRegistrarAlojamiento">Registrar Alojamiento</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- LISTADOS -->
+        <h3>Listados</h3>
+        <button class="btn btn-secondary mb-2" id="btnListaClientes">Listado Clientes</button>
+        <button class="btn btn-secondary mb-2" id="btnListaAlojamientos">Listado Alojamientos</button>
+        <button class="btn btn-secondary mb-2" id="btnReservasCliente">Reservas por Cliente</button>
+        <button class="btn btn-secondary mb-2" id="btnReservasFecha">Reservas entre Fechas</button>
+        <button class="btn btn-secondary mb-2" id="btnHotelesDesayuno">Hoteles con Desayuno</button>
+
+        <!-- Zona de resultado de listados -->
+        <div id="resultados" class="mt-4"></div>
+
+    </div>
+
+    <!-- ARCHIVOS JS -->
+    <script src="objetos.js"></script>
+    <script src="principal.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
