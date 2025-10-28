@@ -45,7 +45,6 @@ class Habitacion extends Alojamiento {
     set desayuno(value) {
         this._desayuno = value;
     }
-    
 }
 
 
@@ -81,11 +80,11 @@ class Cliente {
     _apellidos;
     _usuario;
 
-    constructor(dniCLiente, nombre, apellidos, usuario) {
+    constructor(dniCLiente, nombre, apellidos) {
         this._dniCLiente = dniCLiente;
         this._nombre = nombre;
         this._apellidos = apellidos;
-        this._usuario = usuario;
+        this._usuario = this.generarUsuario();
     }
 
     get nombre() {
@@ -114,6 +113,36 @@ class Cliente {
     }
     set dniCLiente(value) {
         this._dniCLiente = value;
+    }
+
+    generarUsuario() {
+        let inicial = this._nombre.charAt(0);
+        let partesApellido = this._apellidos.split(" ");
+        let apellido1 = partesApellido[0];
+        let apellido2 = partesApellido[1];
+        let tresAp1 = "";
+        let tresAp2 = "";
+        let ultimos3Dni = "";
+
+        if (apellido1.length >= 3) {
+            tresAp1 = apellido1.substring(0, 3);
+        } else {
+            tresAp1 = apellido1;
+        }
+
+        if (apellido2.length >= 3) {
+            tresAp2 = apellido2.substring(0, 3);
+        } else {
+            tresAp2 = apellido2;
+        }
+
+        if (this._dniCLiente.length >= 3) {
+            ultimos3Dni = this._dniCLiente.slice(-3);
+        } else {
+            ultimos3Dni = this._dniCLiente;
+        }
+
+        return (inicial + tresAp1 + tresAp2 + ultimos3Dni).toLowerCase();
     }
 }
 
@@ -193,7 +222,16 @@ class Agencia {
     }
 
     altaAlojamiento(oAlojamiento){
-
+        // respuesta = "";
+        // if (oAlojamiento.idALojamiento in this._alojamientos) {
+        //     console.log("El alojamiento ya existe");
+        //     respuesta = "El alojamiento ya existe";
+        // } else {
+        //     this._alojamientos.push(oAlojamiento);
+        //     console.log("Alojamiento añadido correctamente");
+        //     respuesta = "Alojamiento añadido correctamente";
+        // }
+        // return respuesta;
     }
     
     altaReserva(oReserva){
