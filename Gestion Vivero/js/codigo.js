@@ -1,20 +1,20 @@
 let oVivero = new Vivero();
 
-datosIniciales();
+datosIniciales(); //ESTA FUNCIÓN NO ES NECESARIA, PERO ES ÚTIL PARA TENER DATOS DE EJEMPLO EN EL VIVERO AL INICIAR LA APLICACIÓN
 
-console.log(oVivero);
+console.log(oVivero); //MUESTRA EL OBJETO VIVERO COMPLETO
 
-console.log(oVivero.arboles[3]);
+console.log(oVivero.arboles[3]); //MUESTRA EL ÁRBOL EN LA POSICIÓN 3 DEL ARRAY DE ÁRBOLES DEL VIVERO
 
-console.log(Perenne.prototype);
+console.log(Perenne.prototype); //MUESTRA EL PROTOTIPO DE LA CLASE PERENNE
 
-for (prop of Perenne.prototype) {
-  console.log(prop);
+for (prop of Perenne.prototype) {  
+  console.log(prop); 
 }
 
-console.log(Perenne.prototype);
+console.log(Perenne.prototype); //MUESTRA EL PROTOTIPO DE LA CLASE PERENNE
 
-function datosIniciales() {
+function datosIniciales() { //CARGA DE DATOS INICIALES DE EJEMPLO PARA QUE YA HAYA ÁRBOLES EN EL VIVERO ANTES DE EMPEZAR A USAR LA APLICACIÓN
   oVivero.altaArbol(
     new Perenne(oVivero.siguienteCodigoArbol(), 100, "Olivo", true)
   );
@@ -47,17 +47,17 @@ function datosIniciales() {
   );
 }
 
-// Gestión de formularios
-function gestionFormularios(sFormularioVisible) {
-  ocultarTodosLosFormularios();
+// Gestión de formularios //LOS BUTTON ONCLICK LLAMAN A ESTA FUNCIÓN
+function gestionFormularios(sFormularioVisible) { //PARÁMETRO QUE INDICA QUÉ FORMULARIO HAY QUE MOSTRAR
+  ocultarTodosLosFormularios(); //PRIMERO OCULTAMOS TODOS LOS FORMULARIOS
 
   // Hacemos visible el formulario que llega como parámetro
-  switch (sFormularioVisible) {
+  switch (sFormularioVisible) { //INTERESA QUEDARSE CON EL NOMBRE DE CADA CASE, SERÁN IGUAL AL ID DE CADA FORM, Y SON LOS MISMOS QUE PASAMOS COMO PARÁMETRO A LA FUNCIÓN gestionFormularios EN EL HTML
     case "frmAltaArbol":
-      frmAltaArbol.style.display = "block";
+      frmAltaArbol.style.display = "block"; //HACEMOS VISIBLE EL FORMULARIO
       break;
     case "frmTallaje":
-      frmTallaje.style.display = "block";
+      frmTallaje.style.display = "block"; 
       break;
     case "frmListadoPerennes":
       frmListadoPerennes.style.display = "block";
@@ -66,41 +66,42 @@ function gestionFormularios(sFormularioVisible) {
       frmListadoCaducos.style.display = "block";
       break;
     case "TotalArboles":
-      alert("Hay " + oVivero.totalArbolesVenta() + " árboles a la venta");
+      alert("Hay " + oVivero.totalArbolesVenta() + " árboles a la venta"); //MUESTRA UN ALERT CON EL NÚMERO TOTAL DE ÁRBOLES A LA VENTA
       break;
   }
 }
 
-function mostrarAltaArbol() {
-  ocultarTodosLosFormularios();
+function mostrarAltaArbol() { //PARA MOSTRAR EL FORMULARIO DE ALTA DE ÁRBOL
+  ocultarTodosLosFormularios(); //OCULTAMOS TODOS LOS FORMULARIOS
 
   // Hacemos visible el formulario
   frmAltaArbol.style.display = "block";
 }
 
-function ocultarTodosLosFormularios() {
-  let oFormularios = document.querySelectorAll("form");
+function ocultarTodosLosFormularios() { //PARA OCULTAR TODOS LOS FORMULARIOS
+  let oFormularios = document.querySelectorAll("form"); //SELECCIONA TODOS LOS ELEMENTOS FORM DEL HTML Y LOS GUARDA EN LA VARIABLE oFormularios COMO UN ARRAY
 
-  for (let i = 0; i < oFormularios.length; i++) {
-    oFormularios[i].style.display = "none";
+  for (let i = 0; i < oFormularios.length; i++) { //RECORRE ESE ARRAY
+    oFormularios[i].style.display = "none"; //Y A CADA ELEMENTO LE PONE EL ESTILO display A "none", ES DECIR, LO OCULTA
   }
 }
 
 // aceptarAltaArbol
-function aceptarAltaArbol() {
-  let iTallaje = parseInt(frmAltaArbol.txtTallaje.value.trim());
-  let sEspecie = frmAltaArbol.txtEspecie.value.trim();
+function aceptarAltaArbol() { //PARA GUARDAR LOS DATOS INTRODUCIDOS EN EL FORMULARIO DE ALTA DE ÁRBOL
+  let iTallaje = parseInt(frmAltaArbol.txtTallaje.value.trim()); //CONVIERTE A ENTERO EL VALOR DEL CAMPO txtTallaje DEL FORMULARIO frmAltaArbol
+  let sEspecie = frmAltaArbol.txtEspecie.value.trim(); //TRIM() ELIMINA ESPACIOS EN BLANCO AL PRINCIPIO Y AL FINAL
   let sMesFloracion = frmAltaArbol.txtMesFloracion.value.trim();
   let sFrutal = frmAltaArbol.rbtFrutal.value;
-  let bFrutal = sFrutal == "S" ? true : false;
-  let oArbol;
+  let bFrutal = sFrutal == "S" ? true : false; //CONVIERTE EL VALOR "S" O "N" DEL RADIOBUTTON A BOOLEANO
+  let oArbol; //VARIABLE PARA ALMACENAR EL OBJETO ÁRBOL QUE VAMOS A CREAR
 
-  if (
+  // Validación de datos
+  if ( //COMPRUEBA QUE LOS DATOS OBLIGATORIOS ESTÁN RELLENADOS
     isNaN(iTallaje) ||
     sEspecie.length == 0 ||
-    (frmAltaArbol.rbtTipoArbol.value == "caduco" && sMesFloracion.length == 0)
+    (frmAltaArbol.rbtTipoArbol.value == "caduco" && sMesFloracion.length == 0) //SI ES CADUCO, EL MES DE FLORACIÓN ES OBLIGATORIO
   ) {
-    alert("Faltan datos por rellenar");
+    alert("Faltan datos por rellenar"); 
   } else {
     // Continuo con el alta del árbol
     let iCodigo = oVivero.siguienteCodigoArbol();
