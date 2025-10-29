@@ -104,79 +104,79 @@ function aceptarAltaArbol() { //PARA GUARDAR LOS DATOS INTRODUCIDOS EN EL FORMUL
     alert("Faltan datos por rellenar"); 
   } else {
     // Continuo con el alta del árbol
-    let iCodigo = oVivero.siguienteCodigoArbol();
-    if (frmAltaArbol.rbtTipoArbol.value == "caduco") {
-      oArbol = new Caduco(iCodigo, iTallaje, sEspecie, sMesFloracion);
+    let iCodigo = oVivero.siguienteCodigoArbol(); //OBTIENE EL SIGUIENTE CÓDIGO DISPONIBLE PARA EL NUEVO ÁRBOL
+    if (frmAltaArbol.rbtTipoArbol.value == "caduco") { //CREA UN OBJETO Caduco O Perenne SEGÚN EL TIPO DE ÁRBOL SELECCIONADO
+      oArbol = new Caduco(iCodigo, iTallaje, sEspecie, sMesFloracion); //CREA EL OBJETO Caduco
     } else {
-      oArbol = new Perenne(iCodigo, iTallaje, sEspecie, bFrutal);
+      oArbol = new Perenne(iCodigo, iTallaje, sEspecie, bFrutal); //CREA EL OBJETO Perenne
     }
 
     // Insertar el nuevo árbol
-    if (oVivero.altaArbol(oArbol)) {
-      alert("Arbol registrado OK");
+    if (oVivero.altaArbol(oArbol)) { //INTENTA DAR DE ALTA EL ÁRBOL EN EL VIVERO. SI DEVUELVE TRUE, ES QUE SE HA DADO DE ALTA CORRECTAMENTE
+      alert("Arbol registrado OK"); 
       frmAltaArbol.reset(); // Vaciamos los campos del formulario
-      frmAltaArbol.style.display = "none";
+      frmAltaArbol.style.display = "none"; // Ocultamos el formulario
     } else {
-      alert("Arbol registrado previamente");
+      alert("Arbol registrado previamente"); //SI DEVUELVE FALSE, ES QUE EL ÁRBOL YA ESTABA DADO DE ALTA
     }
   }
 }
 
-function aceptarTallaje() {
-  let iCodigo = parseInt(frmTallaje.txtCodigoArbol.value.trim());
-  let iTallaje = parseInt(frmTallaje.txtTallajeArbol.value.trim());
+function aceptarTallaje() { //PARA GUARDAR EL TALLAJE DE UN ÁRBOL
+  let iCodigo = parseInt(frmTallaje.txtCodigoArbol.value.trim()); //CONVIERTE A ENTERO EL VALOR DEL CAMPO txtCodigoArbol DEL FORMULARIO frmTallaje
+  let iTallaje = parseInt(frmTallaje.txtTallajeArbol.value.trim()); //CONVIERTE A ENTERO EL VALOR DEL CAMPO txtTallajeArbol DEL FORMULARIO frmTallaje
 
-  if (isNaN(iCodigo) || isNaN(iTallaje)) {
+  if (isNaN(iCodigo) || isNaN(iTallaje)) { //COMPRUEBA QUE LOS DATOS OBLIGATORIOS ESTÁN RELLENADOS
     alert("Faltan datos por rellenar");
   } else {
     // Continuo con el registro del tallaje
-    let sRespuesta = oVivero.tallajeArbol(iCodigo, iTallaje);
+    let sRespuesta = oVivero.tallajeArbol(iCodigo, iTallaje); //INTENTA REGISTRAR EL TALLAJE DEL ÁRBOL EN EL VIVERO Y ALMACENA LA RESPUESTA EN LA VARIABLE sRespuesta
 
     alert(sRespuesta);
 
-    if (sRespuesta.includes("Correcto") > 0) {
-      frmTallaje.reset();
-      frmTallaje.style.display = "none";
+    if (sRespuesta.includes("Correcto") > 0) { //SI LA RESPUESTA CONTIENE LA PALABRA "Correcto", ES QUE SE HA REGISTRADO BIEN EL TALLAJE
+      frmTallaje.reset(); // Vaciamos los campos del formulario
+      frmTallaje.style.display = "none"; // Ocultamos el formulario
     }
   }
 }
 
-function aceptarListadoPerennes() {
-  let iAlturaMinima = parseInt(frmListadoPerennes.txtAlturaMinima.value.trim());
-  let sListado = oVivero.listadoPerennes(iAlturaMinima);
+function aceptarListadoPerennes() { //PARA MOSTRAR EL LISTADO DE ÁRBOLES PERENNES CON ALTURA MÍNIMA
+  let iAlturaMinima = parseInt(frmListadoPerennes.txtAlturaMinima.value.trim()); //CONVIERTE A ENTERO EL VALOR DEL CAMPO txtAlturaMinima DEL FORMULARIO frmListadoPerennes
+  let sListado = oVivero.listadoPerennes(iAlturaMinima); //OBTIENE EL LISTADO DE ÁRBOLES PERENNES CON ALTURA MÍNIMA
 
-  let oVentana = open("", "_blank", "");
+  let oVentana = open("", "_blank", ""); //ABRE UNA NUEVA VENTANA DEL NAVEGADOR
 
-  oVentana.document.open();
-  oVentana.document.write(
+  oVentana.document.open(); //ABRE EL DOCUMENTO DE ESA VENTANA PARA ESCRIBIR EN ÉL
+  oVentana.document.write( //ESCRIBE EL TÍTULO Y EL LISTADO EN ESA VENTANA
     "<h1>Listado de árboles perennes de altura mínima: " +
       iAlturaMinima +
       " cm</h1>"
   );
-  oVentana.document.write(sListado);
-  oVentana.document.close();
-  oVentana.document.title = "Listado perennes";
+  oVentana.document.write(sListado); //ESCRIBE EL LISTADO OBTENIDO
+  oVentana.document.close(); //CIERRA EL DOCUMENTO DE ESA VENTANA
+  oVentana.document.title = "Listado perennes"; //PONE EL TÍTULO DE LA PESTAÑA DE ESA VENTANA
 
   // Reseteamos y ocultamos el formulario
   frmListadoPerennes.reset();
   frmListadoPerennes.style.display = "none";
 }
 
-function aceptarListadoCaducos() {
-  let sMesFloracion = frmListadoCaducos.txtMesListado.value.trim();
-  let sListado = oVivero.listadoCaducos(sMesFloracion);
+function aceptarListadoCaducos() { //PARA MOSTRAR EL LISTADO DE ÁRBOLES CADUCOS CON FLORACIÓN EN UN MES DETERMINADO
+  let sMesFloracion = frmListadoCaducos.txtMesListado.value.trim(); //OBTIENE EL VALOR DEL CAMPO txtMesListado DEL FORMULARIO frmListadoCaducos
+  let sListado = oVivero.listadoCaducos(sMesFloracion); //OBTIENE EL LISTADO DE ÁRBOLES CADUCOS CON FLORACIÓN EN ESE MES
 
-  let oVentana = open("", "_blank", "");
+  let oVentana = open("", "_blank", ""); //ABRE UNA NUEVA VENTANA DEL NAVEGADOR
 
-  oVentana.document.open();
-  oVentana.document.write(
-    "<h1>Listado de árboles caducos con floración el mes: " +
+  oVentana.document.open(); //ABRE EL DOCUMENTO DE ESA VENTANA PARA ESCRIBIR EN ÉL
+  oVentana.document.write( //ESCRIBE EL TÍTULO Y EL LISTADO EN ESA VENTANA
+    "<h1>Listado de árboles caducos con floración el mes: " + 
       sMesFloracion +
       "</h1>"
   );
-  oVentana.document.write(sListado);
-  oVentana.document.close();
-  oVentana.document.title = "Listado caducos";
+  oVentana.document.write(sListado); //ESCRIBE EL LISTADO OBTENIDO
+  oVentana.document.close(); //CIERRA EL DOCUMENTO DE ESA VENTANA
+  oVentana.document.title = "Listado caducos"; //PONE EL TÍTULO DE LA PESTAÑA DE ESA VENTANA
 
   // Reseteamos y ocultamos el formulario
   frmListadoCaducos.reset();
