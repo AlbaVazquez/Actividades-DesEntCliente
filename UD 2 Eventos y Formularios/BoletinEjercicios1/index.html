@@ -1,46 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DWEC - Unidad 2: Boletín 1 - Ejercicios</title>
-    <style>
-        /* Estilos básicos para la plantilla */
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        nav { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f4f4f4; }
-        nav button { margin: 5px; padding: 8px 15px; cursor: pointer; }
-        .exercise-container { 
-            border: 2px solid #0056b3; 
-            padding: 20px; 
-            margin-top: 15px; 
-            display: none; /* Inicialmente todos ocultos */
-        }
-        .exercise-container.active { 
-            display: block; /* Muestra el ejercicio activo */
-        }
-        h2 { color: #0056b3; }
-        
-        /* Estilos específicos para el Ejercicio 6 (ejemplo) */
-        #exercise6-content .square {
-            width: 100px;
-            height: 100px;
-            background-color: white;
-            border: 1px solid black;
-            transition: background-color 0.3s;
-        }
-        #exercise6-content .amarillo { /* Clase del Ejercicio 6 */
-            background-color: yellow;
-        }
-        #exercise6-content #output-layer {
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            min-height: 20px;
-        }
-    </style>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DWEC - Unidad 2: Boletín 1 - Ejercicios</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
     <h1>DWEC - Unidad 2: Boletín 1</h1>
 
     <nav id="exercise-menu">
@@ -64,34 +32,254 @@
     <main id="exercise-main-content">
         <div id="exercise1-content" class="exercise-container">
             <h2>Ejercicio 1: Selección de Actor (Radiobutton)</h2>
-            </div>
+
+            <form name="formulario">
+                <fieldset>
+                    <legend>Selecciona tu actor favorito:</legend>
+                    <input type="radio" name="actores" id="actor-1" value="Walter Bruce Willis - 19 de Marzo de 1955"
+                        checked />
+                    <label for="actor-1">Willis</label>
+                    <input type="radio" name="actores" id="actor-2"
+                        value="James Eugene Jim Carrey - 17 de Enero de 1962" />
+                    <label for="actor-2">Carrey</label>
+                    <input type="radio" name="actores" id="actor-3" value="Luis Tosar - 13 de Octubre de 1971" />
+                    <label for="actor-3">Tosar</label>
+                    <input type="button" id="consultar-e1" name="consultar" value="Consultar Más Datos" />
+                </fieldset>
+            </form>
+        </div>
 
         <div id="exercise2-content" class="exercise-container">
             <h2>Ejercicio 2: Selección de Provincia (Select Simple)</h2>
-            </div>
+
+            <form id="formulario" name="formulario">
+                <label for="provincias">Seleccione provincia:</label>
+                <select name="provincias" id="provincias">
+                    <option value="C">A Coruña</option>
+                    <option value="LU">Lugo</option>
+                    <option value="OU">Ourense</option>
+                    <option value="PO">Pontevedra</option>
+                </select>
+                <input type="button" name="boton" value="Consultar información de la opción" />
+            </form>
+        </div>
 
         <div id="exercise3-content" class="exercise-container">
             <h2>Ejercicio 3: Selección de Provincia (Select Múltiple)</h2>
-            </div>
-        
+
+            <form id="formulario" name="formulario">
+                <label for="provincias">Seleccione varias provincias:</label>
+                <select name="provincias" id="provincias" multiple>
+                    <option value="C">A Coruña</option>
+                    <option value="LU">Lugo</option>
+                    <option value="OU">Ourense</option>
+                    <option value="PO">Pontevedra</option>
+                </select>
+                <input type="button" name="boton" value="Consultar información de la opción" />
+            </form>
+        </div>
+
+        <div id="exercise4-content" class="exercise-container">
+            <h2>Ejercicio 4: Mover Provincias entre Listas Múltiples</h2>
+
+            <form id="frmEntrada" name="frmEntrada">
+                <label>Código de provincia</label>
+                <input type="text" name="txtCodigo" id="txtCodigo" />
+                <br />
+                <label>Provincia</label>
+                <input type="text" name="txtProvincia" id="txtProvincia" />
+                <br />
+                <input type="button" name="btnAgregar" id="btnAgregar" onclick="agregarProvincia();"
+                    value="Agregar provincia" />
+
+                <br />
+                <br />
+                <select name="lstProvincias" id="lstProvincias" multiple></select>
+
+                <span style="display: inline-flex; flex-direction: column-reverse">
+                    <input type="button" name="btnPasarDerecha" id="btnPasarDerecha" onclick="pasarDerecha();"
+                        value="➡️" />
+                    <input type="button" name="btnPasarIzquierda" id="btnPasarIzquierda" onclick="pasarIzquierda();"
+                        value="⬅️" />
+                </span>
+
+                <select name="lstDestino" id="lstDestino" multiple></select>
+            </form>
+        </div>
+
+        <div id="exercise5-content" class="exercise-container">
+            <h2>Ejercicio 5: Añadir y Eliminar un Manejador de Eventos</h2>
+
+            <form id="formulario" name="formulario" action="#">
+                <label>¿Te gusta el verano?</label>
+                <input type="checkbox" id="verano" name="verano" value="Si" />
+            </form>
+            <button id="botonMarcar" name="botonMarcar">Marcar/Desmarcar</button>
+            <br /><br />
+            <button onclick="addManejador()">Añadir manejador evento</button>
+            <button onclick="deleteManejador()">Borrar manejador evento</button>
+        </div>
+
         <div id="exercise6-content" class="exercise-container">
-            <h2>Ejercicio 6: Eventos de Ratón y Teclado</h2>
+            <h2>Ejercicio 6: Eventos de Ratón y Teclado (mouseover/keydown)</h2>
             <p>Pasa el ratón por el cuadrado y escribe en el input de texto.</p>
             <div id="square" class="square"></div>
-            <input type="text" id="text-input-6" placeholder="Escribe aquí para ver la tecla pulsada">
+            <input type="text" id="text-input-6" placeholder="Escribe aquí para ver la tecla pulsada" />
             <div id="output-layer"></div>
         </div>
 
         <div id="exercise7-content" class="exercise-container">
-            <h2>Ejercicio 7: Manejador de Eventos Único para Dígitos</h2>
+            <h2>Ejercicio 7: Manejador Único para la Pulsación de Dígitos</h2>
+
+            <input id="salida" type="text" readonly />
+            <br /><br />
+            <div id="teclado">
+                <input type="button" value="1" />
+                <input type="button" value="2" />
+                <input type="button" value="3" />
+                <br />
+                <input type="button" value="4" />
+                <input type="button" value="5" />
+                <input type="button" value="6" />
+                <br />
+                <input type="button" value="7" />
+                <input type="button" value="8" />
+                <input type="button" value="9" />
+                <br />
+                <input type="button" value="0" />
             </div>
+        </div>
+
+        <div id="exercise8-content" class="exercise-container">
+            <h2>Ejercicio 8: Impedir la Introducción de Dígitos</h2>
+
+            <form id="formulario" name="formulario">
+                <label>Input que no permite la introducción de dígitos: </label>
+                <input type="text" id="txtEntrada" name="txtEntrada" />
+            </form>
+        </div>
+
+        <div id="exercise9-content" class="exercise-container">
+            <h2>Ejercicio 9: Impedir Copiar Texto en el Input</h2>
+
+            <form id="formulario" name="formulario">
+                <label>Introduce texto e intenta copiarlo: </label>
+                <input type="text" id="txtEntrada" name="txtEntrada" />
+            </form>
+        </div>
+
+        <div id="exercise10-content" class="exercise-container">
+            <h2>Ejercicio 10: Detección de Botón del Ratón Pulsado</h2>
+
+            <p id="salida"></p>
+        </div>
+
+        <div id="exercise11-content" class="exercise-container">
+            <h2>
+                Ejercicio 11: Propiedades target, currentTarget y this del Objeto
+                Evento
+            </h2>
+
+            <form id="formulario">
+                FORM
+                <div id="capa">
+                    DIV
+                    <p id="parrafo">P</p>
+                </div>
+            </form>
+        </div>
+
+        <div id="exercise12-content" class="exercise-container">
+            <h2>Ejercicio 12: Validación (Input Vacío)</h2>
+
+            <form method="get" action="ej12Destino.html" name="formulario">
+                <input type="text" name="txtTexto" />
+                <input type="submit" value="Aceptar" name="btnAceptar" />
+            </form>
+        </div>
+
+        <div id="exercise13-content" class="exercise-container">
+            <h2>
+                Ejercicio 13: Validación de Formulario con Atributos HTML y RegEx
+            </h2>
+
+            <form action="formularioProcesado.html" name="formulario">
+                <label>Apellidos: </label>
+                <input type="text" name="apellidos" />
+                <br />
+                <label>Nombre: </label>
+                <input type="text" name="nombre" />
+                <br />
+                <label>Fecha de nacimiento: </label>
+                <input type="text" name="fechaNacimiento" placeholder="DD/MM/AAAA" />
+                <br />
+                <label>DNI: </label>
+                <input type="text" name="dni" />
+                <br />
+                <label>Correo electrónico: </label>
+                <input type="text" name="email" />
+                <br />
+                <label>Usuario IDEA: </label>
+                <input type="text" name="usuario" />
+                <br />
+                <label>Teléfono: </label>
+                <input type="text" name="telefono" />
+                <br />
+                <label>Usuario de Twitter: </label>
+                <input type="text" name="twitter" />
+                <br />
+                <input type="submit" name="submit" value="Procesar Formulario" />
+            </form>
+        </div>
+
+        <div id="exercise14-content" class="exercise-container">
+            <h2>Ejercicio 14: Validación de Formulario con JavaScript</h2>
+
+            <form action="formularioProcesado.html" name="formulario">
+                <label>Apellidos: </label>
+                <input type="text" name="apellidos" />
+                <br />
+                <label>Nombre: </label>
+                <input type="text" name="nombre" />
+                <br />
+                <label>Fecha de nacimiento: </label>
+                <input type="text" name="fechaNacimiento" placeholder="DD/MM/AAAA" />
+                <br />
+                <label>DNI: </label>
+                <input type="text" name="dni" />
+                <br />
+                <label>Correo electrónico: </label>
+                <input type="text" name="email" />
+                <br />
+                <label>Usuario IDEA: </label>
+                <input type="text" name="usuario" />
+                <br />
+                <label>Teléfono: </label>
+                <input type="text" name="telefono" />
+                <br />
+                <label>Usuario de Twitter: </label>
+                <input type="text" name="twitter" />
+                <br />
+                <input type="submit" name="submit" value="Procesar Formulario" />
+            </form>
+        </div>
 
         <div id="exercise15-content" class="exercise-container">
-            <h2>Ejercicio 15: Gestión de Cookies</h2>
-            </div>
-        
+            <h2>Ejercicio 15: Gestión de Cookies (Guardar, Recuperar, Eliminar)</h2>
+
+            <form name="formulario">
+                <label>Clave: </label>
+                <input type="text" name="txtClave"></input> <br />
+                <label>Valor: </label>
+                <input type="text" name="txtValor"></input> <br />
+                <input type="button" name="btnGuardar" value="Guardar"></input>
+                <input type="button" name="btnRecuperar" value="Recuperar"></input>
+                <input type="button" name="btnEliminar" value="Eliminar"></input>
+            </form>
+        </div>
     </main>
 
     <script src="scripts.js"></script>
 </body>
+
 </html>
