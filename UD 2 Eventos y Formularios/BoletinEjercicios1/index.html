@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC - Unidad 2: Boletín 1 - Ejercicios</title>
+    <style>
+        /* Estilos básicos para la plantilla */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f4f4f4; }
+        nav button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+        .exercise-container { 
+            border: 2px solid #0056b3; 
+            padding: 20px; 
+            margin-top: 15px; 
+            display: none; /* Inicialmente todos ocultos */
+        }
+        .exercise-container.active { 
+            display: block; /* Muestra el ejercicio activo */
+        }
+        h2 { color: #0056b3; }
+        
+        /* Estilos específicos para el Ejercicio 6 (ejemplo) */
+        #exercise6-content .square {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border: 1px solid black;
+            transition: background-color 0.3s;
+        }
+        #exercise6-content .amarillo { /* Clase del Ejercicio 6 */
+            background-color: yellow;
+        }
+        #exercise6-content #output-layer {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DWEC - Unidad 2: Boletín 1</h1>
+
+    <nav id="exercise-menu">
+        <button data-exercise-id="1">Ejercicio 1</button>
+        <button data-exercise-id="2">Ejercicio 2</button>
+        <button data-exercise-id="3">Ejercicio 3</button>
+        <button data-exercise-id="4">Ejercicio 4</button>
+        <button data-exercise-id="5">Ejercicio 5</button>
+        <button data-exercise-id="6">Ejercicio 6</button>
+        <button data-exercise-id="7">Ejercicio 7</button>
+        <button data-exercise-id="8">Ejercicio 8</button>
+        <button data-exercise-id="9">Ejercicio 9</button>
+        <button data-exercise-id="10">Ejercicio 10</button>
+        <button data-exercise-id="11">Ejercicio 11</button>
+        <button data-exercise-id="12">Ejercicio 12</button>
+        <button data-exercise-id="13">Ejercicio 13</button>
+        <button data-exercise-id="14">Ejercicio 14</button>
+        <button data-exercise-id="15">Ejercicio 15</button>
+    </nav>
+
+    <main id="exercise-main-content">
+        <div id="exercise1-content" class="exercise-container">
+            <h2>Ejercicio 1: Selección de Actor (Radiobutton)</h2>
+            </div>
+
+        <div id="exercise2-content" class="exercise-container">
+            <h2>Ejercicio 2: Selección de Provincia (Select Simple)</h2>
+            </div>
+
+        <div id="exercise3-content" class="exercise-container">
+            <h2>Ejercicio 3: Selección de Provincia (Select Múltiple)</h2>
+            </div>
+        
+        <div id="exercise6-content" class="exercise-container">
+            <h2>Ejercicio 6: Eventos de Ratón y Teclado</h2>
+            <p>Pasa el ratón por el cuadrado y escribe en el input de texto.</p>
+            <div id="square" class="square"></div>
+            <input type="text" id="text-input-6" placeholder="Escribe aquí para ver la tecla pulsada">
+            <div id="output-layer"></div>
+        </div>
+
+        <div id="exercise7-content" class="exercise-container">
+            <h2>Ejercicio 7: Manejador de Eventos Único para Dígitos</h2>
+            </div>
+
+        <div id="exercise15-content" class="exercise-container">
+            <h2>Ejercicio 15: Gestión de Cookies</h2>
+            </div>
+        
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
