@@ -46,17 +46,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- ESTRUCTURA DE INICIALIZACIÓN DE EJERCICIOS ---
 
   window.initExercise1 = () => {
-    formulario1.consultar.addEventListener("click", mostrarDatos);
-    function mostrarDatos() {
-      for (let actor of formulario1.actores) {
-        if (actor.checked) {
-          console.log(actor.value);
+    formulario1.consultar.addEventListener("click", mostrarDatos); //SI HAGO CLICK EN EL BOTÓN DE CONSULTAR DATOS INICIA UN EVENTO
+    function mostrarDatos() { 
+      for (let actor of formulario1.actores) { //RECORRO LOS ACTORES DEL GRUPO (name="actores") 'actores'
+        if (actor.checked) { //SI EL ACTOR ITERADO ES EL SELECCIONADO...
+          console.log(actor.value); //MOSTRAR SUS VALORES POR CONSOLA
         }
       }
     }
   };
 
-  window.initExercise2 = () => {};
+  window.initExercise2 = () => {
+    formulario2.boton.addEventListener("click", mostrarInfo);
+    function mostrarInfo() {
+      provincia = formulario2.provincias.value;
+      console.log(`Provincia: `)
+    }
+  };
 
   window.initExercise3 = () => {};
 
@@ -66,7 +72,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.initExercise6 = () => {};
 
-  window.initExercise7 = () => {};
+  window.initExercise7 = () => {
+    const teclado = document.getElementById("teclado"); //ENCUENTRO EL DIV QUE CONTIENE EL TECLADO
+    const salida = document.getElementById("salida"); //ENCUENTRO EL CAMPO POR EL QUE SALDRÁ EL TEXTO
+    salida.value = ""; //VACÍO ESE CAMPO PARA QUE APAREZCA EN BLANCO
+
+    teclado.addEventListener("click", pulsarDigito); //SI HAGO CLICK EN EL TECLADO INICIA UN EVENTO
+
+    function pulsarDigito() { //FUNCIÓN PARA MOSTRAR LA TECLA PULSADA
+      const elementoClicado = event.target; //RECOJO EL ELEMENTO AL QUE HE HECHO CLICK
+      
+      if (elementoClicado.tagName === "INPUT" && elementoClicado.type === "button") { //SI HE HECHO CLICK EN UN BOTÓN...
+        const digitoPulsado = elementoClicado.value; //RECOJO EL VALOR DEL BOTÓN CLICADO
+        salida.value += digitoPulsado; //Y LO MUESTRO COMO SALIDA
+
+        console.log(`Dígito pulsado: ${digitoPulsado}`);
+      }
+    }
+  };
 
   window.initExercise8 = () => {};
 
