@@ -57,16 +57,84 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.initExercise2 = () => {
-    formulario2.boton.addEventListener("click", mostrarInfo);
-    function mostrarInfo() {
-      provincia = formulario2.provincias.value;
-      console.log(`Provincia: `)
+    const selectProvincias = document.getElementById("provincias"); //OBTENER LA LISTA DE PROVINCIAS
+    const botonConsultar = document.querySelector("#exercise2-content input[name='boton']");
+
+    botonConsultar.addEventListener("click", mostrarDatos);
+    function mostrarDatos() {
+      const indiceSeleccionado = selectProvincias.selectedIndex; //OBTENER LA POSICIÓN (índice) DE LA PROVINCIA SELECCIONADA
+      const opcionSeleccionada = selectProvincias.options[indiceSeleccionado]; //OBTENER EL ELEMENTO <OPTION> COMPLETO QUE ESTÁ SELECCIONADO
+
+      const valor = opcionSeleccionada.value; //OBTENER EL CÓDIGO
+      const texto = opcionSeleccionada.text; //OBTENER EL NOMBRE VISIBLE
+
+      console.log(`Código (Value): ${valor}`);
+      console.log(`Provincia (Text): ${texto}`);
     }
   };
 
-  window.initExercise3 = () => {};
+  window.initExercise3 = () => { 
+    const selectProvincias = document.querySelector("#exercise3-content select[name='provincias']"); //OBTENER LA LISTA DE PROVINCIAS DEL SELECT
+    const botonConsultar = document.querySelector("#exercise3-content input[name='boton']"); //OBTENER LA REFERENCIA DEL BOTÓN
 
-  window.initExercise4 = () => {};
+    botonConsultar.addEventListener("click", mostrarDatos);
+    function mostrarDatos() {
+      const opciones = selectProvincias.options; //OBTENER TODOS LOS ELEMENTOS <option>
+      let contador = 0; //CONTADOR PARA SABER CUÁNTAS SE HAN SELECCIONADO
+
+      for (let i = 0; i < opciones.length; i++) { //RECORRER TODAS LAS OPCIONES DEL SELECT
+        const opcionActual = opciones[i]; //GUARDAR LA POSICIÓN ACTUAL
+
+        if (opcionActual.selected) { //SI LA POSICIÓN ACTUAL ESTÁ SELECCIONADA...
+          const valor = opcionActual.value; //RESCATAMOS EL VALOR Y EL TEXTO
+          const texto = opcionActual.text;
+
+          console.log (`[${contador + 1}] Código: ${valor} | Provincia: ${texto}`);
+          contador++; //LO MOSTRAMOS POR CONSOLA Y SUMAMOS AL CONTADOR
+        }
+      }
+
+      if (contador === 0) { //SI EL CONTADOR ESTÁ EN 0 ES QUE NO SE HA SELECCIONADO NINGUNA
+            console.log("Advertencia: No se seleccionó ninguna provincia.");
+        }
+    }
+  };
+
+  window.initExercise4 = () => {
+    const lstProvincias = document.getElementById("lstProvincias"); //ASEGURA QUE LA LISTA ESTÉ VACÍA AL CARGAR EL EJERCICIO
+    lstProvincias.innerHTML = '';
+
+    window.agregarProvincia = agregarProvincia;
+    window.pasarDerecha = pasarDerecha;
+    window.pasarIzquierda = pasarIzquierda;
+
+    function agregarProvincia() {
+      const txtCodigo = document.getElementById("txtCodigo");
+      const txtProvincia = document.getElementById("txtProvincia");
+      const lstProvincias = document.getElementById("lstProvincias");
+
+      const codigo = txtCodigo.valor.trim();
+      const provincia = txtProvincia.value.trim();
+
+      if (codigo && provincia) {
+        const nuevaOpcion = document.createElement("option");
+
+        nuevaOpcion.value = codigo;
+        nuevaOpcion.text = provincia;
+
+        lstProvincias.appendChild(nuevaOpcion);
+
+        txtCodigo.value = "";
+        txtProvincia.value = "";
+
+        console.log(`Provincia agregada: ${provincia} (${codigo})`);
+      } else {
+          alert("Introduce el código y el nombre de una provincia");
+      }
+    }
+
+    
+  };
 
   window.initExercise5 = () => {};
 
