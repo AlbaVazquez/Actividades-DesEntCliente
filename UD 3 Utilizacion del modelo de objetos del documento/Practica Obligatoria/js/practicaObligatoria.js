@@ -72,78 +72,114 @@ function cargaDatosIniciales() {
   catalogo.addProducto(16, "Salsa Barbacoa 500gr (Caja de 30)", 67.5, 2);
 }
 
-const frmComercial = document.getElementById("frmComercial"); //COGER EL FORMULARIO DE COMERCIALES
-const comercialesSelect = frmComercial.elements["comerciales"]; //COGER EL SELECT DE COMERCIALES PARA LLENARLO
-const frmControles = document.getElementById("frmControles"); //COGER EL FORMULARIO DE CONTROLES
-const categoriasSelect = frmControles.elements["categorias"]; //COGER EL SELECT DE CATEGORIAS PARA LLENARLO
-const productosSelect = frmControles.elements["productos"]; //COGER EL SELECT DE PRODUCTOS PARA LLENARLO
+const frmComercial = document.getElementById("frmComercial");
+const comercialesSelect = frmComercial.elements["comerciales"];
+const frmControles = document.getElementById("frmControles");
+const categoriasSelect = frmControles.elements["categorias"];
+const productosSelect = frmControles.elements["productos"];
+const clientesDiv = document.getElementById("clientes");
+const pedido = document.getElementById("pedido")
 
 
-function cargarFormularios() { //FUNCION PARA CARGAR LOS SELECTS DE COMERCIALES Y CATEGORIAS
-  for (let i = 0; i < comerciales.length; i++) {  //RECORRER EL ARRAY DE COMERCIALES
-    const option = document.createElement("option"); //CREAR UNA OPCION
-    option.value = i; //ASIGNARLE EL VALOR DEL INDICE
-    option.text = comerciales[i]; //ASIGNARLE EL TEXTO DEL COMERCIAL
-    comercialesSelect.add(option); //AÑADIR LA OPCION AL SELECT
+function cargarFormularios() {
+  for (let i = 0; i < comerciales.length; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.text = comerciales[i];
+    comercialesSelect.add(option);
   }
 
-  for (let i = 0; i < categorias.length; i++) { //RECORRER EL ARRAY DE CATEGORIAS
-    const option = document.createElement("option"); //CREAR UNA OPCION
-    option.value = i; //ASIGNARLE EL VALOR DEL INDICE
-    option.text = categorias[i]; //ASIGNARLE EL TEXTO DE LA CATEGORIA
-    categoriasSelect.add(option); //AÑADIR LA OPCION AL SELECT
+  for (let i = 0; i < categorias.length; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.text = categorias[i];
+    categoriasSelect.add(option);
   }
-  cargarProductosPorCategoria(categoriasSelect.value); //CARGAR LOS PRODUCTOS DE LA CATEGORIA SELECCIONADA
-  obtenerClientePorComercial(comercialesSelect.value); //CARGAR LOS CLIENTES DEL COMERCIAL SELECCIONADO
+  cargarProductosPorCategoria(categoriasSelect.value);
+  obtenerClientePorComercial(comercialesSelect.value);
 }
 
-function obtenerClientePorComercial(idComercial) { //FUNCION PARA OBTENER LOS CLIENTES DEL COMERCIAL SELECCIONADO
-  const divClientes = document.getElementById("clientes"); //COGER EL DIV DONDE SE MOSTRARAN LOS CLIENTES
-  const clientesDelComercial = clientes[idComercial]; //OBTENER LOS CLIENTES DEL COMERCIAL SELECCIONADO
+function obtenerClientePorComercial(idComercial) {
+  const clientesDelComercial = clientes[idComercial];
 
-  const clientesAnteriores = divClientes.querySelectorAll(".cliente"); //COGER LOS CLIENTES QUE YA ESTAN MOSTRADOS
+  const clientesAnteriores = clientesDiv.querySelectorAll(".cliente");
 
-  clientesAnteriores.forEach(clienteDiv => { //RECORRER LOS CLIENTES ANTERIORES
-    clienteDiv.remove(); //ELIMINARLOS
+  clientesAnteriores.forEach(clienteDiv => {
+    clienteDiv.remove();
   });
 
-  for (let i = 0; i < clientesDelComercial.length; i++) { //RECORRER LOS CLIENTES DEL COMERCIAL SELECCIONADO
-    const div = document.createElement("div"); //CREAR UN DIV PARA CADA CLIENTE
-    div.textContent = clientesDelComercial[i]; //ASIGNARLE EL NOMBRE DEL CLIENTE
-    div.classList.add("cliente"); //AÑADIRLE LA CLASE CLIENTE
-    div.classList.add("pagado"); //AÑADIRLE LA CLASE PAGADO
-    divClientes.appendChild(div); //AÑADIR EL DIV AL DIV DE CLIENTES
+  for (let i = 0; i < clientesDelComercial.length; i++) {
+    const div = document.createElement("div");
+    div.textContent = clientesDelComercial[i];
+    div.classList.add("cliente");
+    div.classList.add("pagado");
+    div.addEventListener("click", function () {
+      marcarClienteSeleccionado(div);
+    });
+
+    clientesDiv.appendChild(div);
   }
 }
 
-function cargarProductosPorCategoria(valorCategoria) { //FUNCION PARA CARGAR LOS PRODUCTOS DE LA CATEGORIA SELECCIONADA
-  const idCategoriaSeleccionada = parseInt(valorCategoria); //CONVERTIR EL VALOR DE LA CATEGORIA A ENTERO
+function marcarClienteSeleccionado(divPulsado) {
+  const todosLosClientes = clientesDiv.querySelectorAll(".cliente");
 
-  productosSelect.innerHTML = ""; //LIMPIAR EL SELECT DE PRODUCTOS
+  todosLosClientes.forEach(div => {
+    div.classList.remove("seleccionado");
+  });
+  divPulsado.classList.add("seleccionado");
+}
 
-  for (let i = 0; i < catalogo.productos.length; i++) { //RECORRER LOS PRODUCTOS DEL CATALOGO
-    const producto = catalogo.productos[i]; //OBTENER EL PRODUCTO ACTUAL
+function cargarProductosPorCategoria(valorCategoria) {
+  const idCategoriaSeleccionada = parseInt(valorCategoria);
 
-    if (producto.idCategoria === idCategoriaSeleccionada) { //SI EL ID DE LA CATEGORIA DEL PRODUCTO ES IGUAL AL ID DE LA CATEGORIA SELECCIONADA
+  productosSelect.innerHTML = "";
 
-      const option = document.createElement("option"); //CREAR UNA OPCION
-      option.value = producto.idProducto_1; //ASIGNARLE EL VALOR DEL ID DEL PRODUCTO
-      option.text = producto.nombreProducto; //ASIGNARLE EL TEXTO DEL NOMBRE DEL PRODUCTO
-      productosSelect.add(option); //AÑADIR LA OPCION AL SELECT DE PRODUCTOS
+  for (let i = 0; i < catalogo.productos.length; i++) {
+    const producto = catalogo.productos[i];
+
+    if (producto.idCategoria === idCategoriaSeleccionada) {
+
+      const option = document.createElement("option");
+      option.value = producto._idProducto;
+      option.text = producto.nombreProducto;
+      productosSelect.add(option);
     }
   }
 }
 
-cargaDatosIniciales(); //CARGAR LOS DATOS INICIALES DEL CATALOGO
-cargarFormularios(); //CARGAR LOS FORMULARIOS DE COMERCIALES Y CATEGORIAS
+function unidadesSeleccionadas() {
+  const teclado = document.getElementById("teclado")
+  const teclas = teclado.querySelectorAll(".tecla")
 
-comercialesSelect.addEventListener("change", function () { //EVENTO CUANDO CAMBIA EL SELECT DE COMERCIALES
-  obtenerClientePorComercial(this.value); //OBTENER LOS CLIENTES DEL COMERCIAL SELECCIONADO
+  teclas.forEach(div => {
+    div.addEventListener("click", function () {
+      nuevaLineaPedido(div.value);
+    })
+  });
+}
+
+function nuevaLineaPedido(cantidad) {
+  const idProducto = parseInt(productosSelect.value);
+  const nombreProducto = productosSelect.options[productosSelect.selectedIndex].text;
+
+  let tabla = "<table>";
+  tabla += "<tr><th>Modificar</th><th>Uds.</th><th>Id.</th><th>Producto</th><th>Precio</th></tr>";
+  tabla += "<tr><td><button class='boton'>+</button><button class='boton'>-</button></td><td>" + cantidad + "</td><td>" + idProducto + "</td><td>" + nombreProducto + "</td><td>" + precioProducto + "</td></tr>";
+  tabla += "</table>";
+  pedido.innerHTML = tabla;
+}
+
+
+
+cargaDatosIniciales();
+cargarFormularios();
+unidadesSeleccionadas();
+
+comercialesSelect.addEventListener("change", function () {
+  obtenerClientePorComercial(this.value);
 });
 
-categoriasSelect.addEventListener("change", function () { //EVENTO CUANDO CAMBIA EL SELECT DE CATEGORIAS
-  cargarProductosPorCategoria(this.value); //CARGAR LOS PRODUCTOS DE LA CATEGORIA SELECCIONADA
+categoriasSelect.addEventListener("change", function () {
+  cargarProductosPorCategoria(this.value);
 });
-
-
-
