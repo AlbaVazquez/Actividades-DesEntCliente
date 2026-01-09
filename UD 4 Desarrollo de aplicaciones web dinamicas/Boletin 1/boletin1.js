@@ -4,17 +4,26 @@
 //          return "Hola " + nombre;
 //          }
 
-
+const saludar = nombre => "Hola " + nombre;
 
 // 2. Crea una función flecha llamada ToogleButton que reciba un texto y retorne
 //    un objeto cualquiera creado por ti simulando un elemento HTML.
 
-
+const ToggleButton = texto => {
+    return {
+        type: "button",
+        text: texto,
+        onClick: () => console.log("Botón clicado")
+    }
+}
 
 // 3. Dadas dos variables marca y modelo, crea una frase que se devuelva por
 //    consola que diga "El coche es un [marca] [modelo] del año [año actual]".
 
-
+const marca = "Toyota";
+const modelo = "Corolla";
+const añoActual = new Date().getFullYear();
+console.log(`El coche es un ${marca} ${modelo} del año ${añoActual}`);
 
 // 4. Crea una función que reciba un objeto usuario (con nombre e imagen) y
 //    devuelva por consola un string que simule una tarjeta HTML usando Template
@@ -24,7 +33,16 @@
 //          <h2>Pepe Gómez</h2>
 //      </div>
 
+const usuario = { nombre: "Pepe Gómez", imagen: "pepeGomez.jpg" };
 
+const crearTarjeta = ({ nombre, imagen }) => {
+    return `
+    <div class="card">
+        <img src="${imagen}" alt="${nombre}" />
+        <h2>${nombre}</h2>
+    </div>
+    `;
+}
 
 // 5. A partir del objeto indicado más abajo, crea una función mostrarPerfil que
 //    lo reciba como parámetro. Usa desestructuración directamente en los argumentos
@@ -32,14 +50,20 @@
 //    ("invitado").
 //      const user = { nombre: "Pedro", email: "pedro@email.com" }
 
+const user = { nombre: "Pedro", email: "pedro@gmail.com" };
 
+const mostrarPerfil = ({ nombre, email, rol = "invitado" }) => {
+    console.log(`Nombre: ${nombre}, Email: ${email}, Rol: ${rol}`);
+}
 
 // 6. A partir del objeto indicado más abajo, crea un nuevo objeto nuevoEstado que
 //    sobrescriba loading a false y mantenga el resto de propiedades igual, sin
 //    modificar el objeto original.
 // 		const estado = { loading: true, error: null, data: [45,53,23] }
 
+const estado = { loading: true, error: null, data: [45, 53, 23] };
 
+const nuevoEstado = { ...estado, loading: false };
 
 // 7. Crea una función sumar que pueda recibir cualquier cantidad de números como
 //    argumentos y devuelva la suma total. Para resolverlo tienes que usar rest
