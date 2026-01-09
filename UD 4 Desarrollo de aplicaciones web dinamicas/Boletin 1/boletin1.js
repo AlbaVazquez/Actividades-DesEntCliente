@@ -6,6 +6,8 @@
 
 const saludar = nombre => "Hola " + nombre;
 
+consoleº.log(saludar("Ana"));
+
 // 2. Crea una función flecha llamada ToogleButton que reciba un texto y retorne
 //    un objeto cualquiera creado por ti simulando un elemento HTML.
 
@@ -16,6 +18,8 @@ const ToggleButton = texto => {
         onClick: () => console.log("Botón clicado")
     }
 }
+
+console.log(ToggleButton("Enviar"));
 
 // 3. Dadas dos variables marca y modelo, crea una frase que se devuelva por
 //    consola que diga "El coche es un [marca] [modelo] del año [año actual]".
@@ -44,6 +48,8 @@ const crearTarjeta = ({ nombre, imagen }) => {
     `;
 }
 
+console.log(crearTarjeta(usuario));
+
 // 5. A partir del objeto indicado más abajo, crea una función mostrarPerfil que
 //    lo reciba como parámetro. Usa desestructuración directamente en los argumentos
 //    de la función para extraer nombre, email y un valor por defecto para rol
@@ -56,6 +62,8 @@ const mostrarPerfil = ({ nombre, email, rol = "invitado" }) => {
     console.log(`Nombre: ${nombre}, Email: ${email}, Rol: ${rol}`);
 }
 
+console.log(mostrarPerfil(user));
+
 // 6. A partir del objeto indicado más abajo, crea un nuevo objeto nuevoEstado que
 //    sobrescriba loading a false y mantenga el resto de propiedades igual, sin
 //    modificar el objeto original.
@@ -65,12 +73,18 @@ const estado = { loading: true, error: null, data: [45, 53, 23] };
 
 const nuevoEstado = { ...estado, loading: false };
 
+console.log(nuevoEstado);
+
 // 7. Crea una función sumar que pueda recibir cualquier cantidad de números como
 //    argumentos y devuelva la suma total. Para resolverlo tienes que usar rest
 //    parameter como argumento de la función y el método reduce del objeto
 //    predefinido Array.
 
+const sumar = (...numeros) => {
+    return numeros.reduce((acumulador, numero) => acumulador + numero, 0);
+}
 
+console.log(sumar(1, 2, 3, 4, 5));
 
 // 8. En el fichero funciones.js crea y exporta las funciones suma y resta que
 //    reciben dos parámetros y devuelven cada una la operación correspondiente.
