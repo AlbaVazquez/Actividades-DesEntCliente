@@ -6,4 +6,5 @@
 
 const saludar = nombre => "Hola " + nombre;
 
+document.write(saludar("Juan"));
 console.log(saludar("Ana"));

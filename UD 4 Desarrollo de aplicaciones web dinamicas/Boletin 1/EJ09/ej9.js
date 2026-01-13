@@ -5,3 +5,7 @@
 //    Prueba a instanciar un objeto con este nuevo nombre y a visualizarlo por
 //    consola.
 
+import Usuario from './persona.js';
+
+const usuario = new Usuario('Pedro','González López',34);
+console.log(usuario);

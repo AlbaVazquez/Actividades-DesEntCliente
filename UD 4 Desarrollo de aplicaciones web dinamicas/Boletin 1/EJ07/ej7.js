@@ -8,3 +8,5 @@ const sumar = (...numeros) => {
 }
 
 console.log(sumar(1, 2, 3, 4, 5));
+
+document.write(`La suma es: ${sumar(1, 2, 3, 4, 5)}`);

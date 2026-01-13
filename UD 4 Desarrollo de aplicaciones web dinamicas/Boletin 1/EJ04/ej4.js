@@ -18,3 +18,5 @@ const crearTarjeta = ({ nombre, imagen }) => {
 }
 
 console.log(crearTarjeta(usuario));
+
+document.write(crearTarjeta(usuario));

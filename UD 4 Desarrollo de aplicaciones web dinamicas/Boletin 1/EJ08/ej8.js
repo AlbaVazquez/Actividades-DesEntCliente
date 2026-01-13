@@ -3,3 +3,7 @@
 //    En el fichero ej9.js debes importar ambas funciones y mostrar por consola la
 //    demostración de que funcionan correctamente.
 
+import { suma, resta } from './funciones.js';
+
+console.log(suma(3,5));
+console.log(resta(8,5));

@@ -1,13 +1,14 @@
 // 2. Crea una función flecha llamada ToogleButton que reciba un texto y retorne
 //    un objeto cualquiera creado por ti simulando un elemento HTML.
 
+const ToogleButton = texto => ({
+    type: "button",
+    text: texto,
+    classname: "btn btn-primary",
+    onClick: () => console.log(`Has hecho clic en el botón: ${texto}`)
+});
 
-const ToggleButton = texto => {
-    return {
-        type: "button",
-        text: texto,
-        onClick: () => console.log("Botón clicado")
-    }
-}
-
-console.log(ToggleButton("Enviar"));
+// Ejemplo de uso
+const miBoton = ToogleButton("Enviar");
+console.log(miBoton);
+miBoton.onClick();
