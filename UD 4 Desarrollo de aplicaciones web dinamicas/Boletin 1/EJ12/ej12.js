@@ -4,3 +4,16 @@
 //     segundos. Para este ejercicio no será necesario controlar el posible error del
 //     objeto Promise y se debe usar async/await.
 
+
+
+async function muestraMensaje() {
+    let promise = new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(document.getElementById("msjExito").value);
+        }, 2000);
+    });
+    document.getElementById("salida").innerHTML = await promise;
+}
+
+document.getElementById("iniciaPromesa").onclick = muestraMensaje;
+
