@@ -50,7 +50,7 @@ export function EquipmentForm({ onGuardar }: Props) {
             <h2 className="text-xl font-bold mb-4">Agregar Nuevo Equipo</h2>
             <div className="mb-4">
                 <label className="block mb-1 font-semibold">Nombre:</label>
-                <input 
+                <input
                     type="text"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
@@ -60,7 +60,7 @@ export function EquipmentForm({ onGuardar }: Props) {
             </div>
             <div className="mb-4">
                 <label className="block mb-1 font-semibold">Tipo:</label>
-                <select 
+                <select
                     value={tipo}
                     onChange={(e) => setTipo(e.target.value as Equipment["tipo"])}
                     className="w-full border p-2 rounded"
@@ -72,7 +72,7 @@ export function EquipmentForm({ onGuardar }: Props) {
             </div>
             <div className="mb-4">
                 <label className="block mb-1 font-semibold">Estado:</label>
-                <select 
+                <select
                     value={estado}
                     onChange={(e) => setEstado(e.target.value as Equipment["estado"])}
                     className="w-full border p-2 rounded"
@@ -82,13 +82,13 @@ export function EquipmentForm({ onGuardar }: Props) {
                     <option value="averiado">Averiado</option>
                 </select>
             </div>
-            <button 
-                type="submit" 
+            <button
+                type="submit"
                 disabled={!isFormValid}
                 className={`px-4 py-2 rounded text-white ${isFormValid ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
             >
                 Agregar Equipo
             </button>
         </form>
-    ); 
+    );
 }
