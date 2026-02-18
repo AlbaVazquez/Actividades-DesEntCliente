@@ -3,7 +3,7 @@ import type { Equipment } from './types';
 import { useState, useEffect } from 'react';
 import { EquipmentForm } from './components/EquipmentForm';
 
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './firebase'; // Tu conexión a la base de datos
 
 function App() {
@@ -41,6 +41,19 @@ const agregarEquipo = (nuevoEquipo: Equipment) => {
     setEquipos([...equipos, nuevoEquipo]);
 };
 
+const eliminarEquipo = async (idAEliminar: string) => {
+  if (!window.confirm("¿Seguro que quieres eliminar este equipo?")) return;
+
+  try {
+    await deleteDoc(doc(db, 'equipos', idAEliminar));
+
+    setEquipos(equipos.filter(equipo => equipo.id !== idAEliminar));
+  } catch (error) {
+    console.error("Error al eliminar:", error);
+    alert("Hubo un error al intentar borrar el equipo.");
+  }
+};
+
   return (
     <div className="p-8 font-sans max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">📦 TechInventory</h1>
@@ -51,10 +64,12 @@ const agregarEquipo = (nuevoEquipo: Equipment) => {
       {isLoading ? (
         <p className="text-gray-500 font-bold animate-pulse">Cargando inventario desde la nube...</p>
       ) : (
-        <EquipmentList equipos={equipos} />
+        <EquipmentList equipos={equipos} onEliminar={eliminarEquipo} />
       )}
     </div>
   )
 }
+
+
 
 export default App;
