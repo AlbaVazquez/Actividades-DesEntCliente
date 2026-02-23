@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro Procesado con Éxito</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .success-container {
+        background-color: #ffffff;
+        border-left: 5px solid #28a745;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 8px;
+        max-width: 500px;
+        text-align: left;
+      }
+      .success-header {
+        color: #155724;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 0;
+      }
+      .success-header svg {
+        width: 30px;
+        height: 30px;
+        fill: #28a745;
+      }
+      .data-list {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        list-style-type: none;
+      }
+      .data-list li {
+        margin-bottom: 8px;
+      }
+      .data-list strong {
+        color: #495057;
+      }
+      .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s;
+      }
+      .btn-back:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="success-container">
+      <h2 class="success-header">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+          />
+        </svg>
+        ¡Registro Guardado!
+      </h2>
+      <p>
+        Los datos del alquiler del vehículo han sido validados y almacenados
+        correctamente en el sistema.
+      </p>
+
+      <h3>Resumen del alta:</h3>
+      <ul class="data-list" id="resumenDatos">
+        <li>Cargando datos...</li>
+      </ul>
+
+      <a href="ejercicio3.html" class="btn-back">Registrar otro vehículo</a>
+    </div>
+
+    <script>
+      // Este script captura los datos enviados por el formulario mediante la URL (GET)
+      window.onload = function () {
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const listaResumen = document.getElementById("resumenDatos");
+
+        // Comprobamos si hay parámetros en la URL
+        if (parametrosURL.has("conductor")) {
+          // Limpiamos el texto de "Cargando datos..."
+          listaResumen.innerHTML = "";
+
+          // Mapeamos los "names" del formulario a textos más legibles
+          const etiquetas = {
+            conductor: "Conductor",
+            fecha: "Fecha de Registro",
+            tipoVehiculo: "Tipo",
+            matricula: "Matrícula",
+            plaza: "Plaza de Parking",
+          };
+
+          // Iteramos sobre los parámetros y creamos los elementos de la lista
+          parametrosURL.forEach((valor, clave) => {
+            const etiqueta = etiquetas[clave] || clave;
+            const li = document.createElement("li");
+
+            // Si es el tipo de vehículo, ponemos la primera letra en mayúscula para que quede mejor
+            let valorFormateado = valor;
+            if (clave === "tipoVehiculo" && valor) {
+              valorFormateado = valor.charAt(0).toUpperCase() + valor.slice(1);
+            }
+
+            li.innerHTML = `<strong>${etiqueta}:</strong> ${valorFormateado}`;
+            listaResumen.append(li);
+          });
+        } else {
+          listaResumen.innerHTML =
+            "<li><em>No se recibieron datos del formulario.</em></li>";
+        }
+      };
+    </script>
+  </body>
+</html>

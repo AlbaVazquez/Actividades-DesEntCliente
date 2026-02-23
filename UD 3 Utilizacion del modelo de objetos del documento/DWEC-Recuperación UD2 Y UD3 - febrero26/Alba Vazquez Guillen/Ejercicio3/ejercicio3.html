@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 3 - Flota</title>
+    <link rel="stylesheet" href="./ejercicio3.css" />
+  </head>
+  <body>
+    <h1>Registro de Vehículo de Alquiler</h1>
+
+    <form name="formularioFlota" action="./ejercicio3FormProcesado.html">
+      <label>Nombre del Conductor: <input type="text" name="conductor" /></label
+      ><br /><br />
+      <label
+        >Fecha de Registro (DD/MM/AAAA):
+        <input type="text" name="fecha" /></label
+      ><br /><br />
+
+      <label
+        >Tipo de Vehículo:
+        <select name="tipoVehiculo">
+          <option value="">Seleccione...</option>
+          <option value="turismo">Turismo</option>
+          <option value="ciclomotor">Ciclomotor</option>
+          <option value="comercial">Comercial</option>
+        </select> </label
+      ><br /><br />
+
+      <label>Matrícula: <input type="text" name="matricula" /></label
+      ><br /><br />
+      <label
+        >Plaza de Parking (Ej: P-015): <input type="text" name="plaza" /></label
+      ><br /><br />
+
+      <button type="submit">Registrar Vehículo</button>
+    </form>
+
+    <div id="mensajes"></div>
+
+    <script src="./ejercicio3.js"></script>
+  </body>
+</html>

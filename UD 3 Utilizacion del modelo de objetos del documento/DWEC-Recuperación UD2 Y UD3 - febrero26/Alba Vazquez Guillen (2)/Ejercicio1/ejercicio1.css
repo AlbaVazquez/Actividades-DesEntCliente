@@ -1,0 +1,16 @@
+.menu-item {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.allergen-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 5px;
+  display: none;
+}

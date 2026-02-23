@@ -1,0 +1,12 @@
+.empty-list {
+  color: #856404;
+  background-color: #fff3cd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.error-list {
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 10px;
+  margin-bottom: 10px;
+}

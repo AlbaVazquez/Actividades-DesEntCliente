@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 2</title>
+    <link rel="stylesheet" href="./ejercicio2.css" />
+  </head>
+  <body>
+    <h1>Gestor de Tareas</h1>
+
+    <div id="controles">
+      <h3>1. Destino</h3>
+      <input type="radio" name="destino" value="colToDo" id="radToDo" /> To Do
+      <input type="radio" name="destino" value="colInProgress" id="radInProg" />
+      In Progress
+      <input type="radio" name="destino" value="colDone" id="radDone" /> Done
+
+      <h3>2. Operación: Añadir</h3>
+      <input type="radio" name="metodo" value="append" checked /> Al final
+      <input type="radio" name="metodo" value="prepend" /> Al principio
+
+      <h3>3. Mantener copia (Clonar)</h3>
+      <input type="radio" name="clonar" value="si" /> SÍ
+      <input type="radio" name="clonar" value="no" checked /> NO <br /><br />
+      <button id="btnMover">Mover Tarea</button>
+      <button id="btnRestaurar">Reiniciar Tablero</button>
+    </div>
+
+    <hr />
+    <div id="backlog" class="columna">
+      <h2>Backlog (Origen)</h2>
+      <div class="tarea"><input type="checkbox" /> Diseñar BBDD</div>
+      <div class="tarea"><input type="checkbox" /> Crear API</div>
+      <div class="tarea"><input type="checkbox" /> Validar Login</div>
+    </div>
+
+    <div id="colToDo" class="columna"><h2>To Do</h2></div>
+    <div id="colInProgress" class="columna"><h2>In Progress</h2></div>
+    <div id="colDone" class="columna"><h2>Done</h2></div>
+
+    <script src="./ejercicio2.js"></script>
+  </body>
+</html>
